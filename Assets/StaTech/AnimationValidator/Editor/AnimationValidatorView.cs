@@ -42,6 +42,9 @@ namespace StaTech.AnimationValidator
         private static AnimationValidatorView _window;
         private static Vector2 _scrollPos;
 
+        private static Color darkGreen = new Color(0, 0.75f, 0);
+        private static Color orange = new Color(1f, 0.55f, 0);
+
         [MenuItem("GameObject/アニメーションクリップ修正", false, -1)]
         public static void Open()
         {
@@ -154,6 +157,8 @@ namespace StaTech.AnimationValidator
                                 AnimationValidator.UpdateAnimationRelativePath(prop, path);
                             });
                         }
+
+                        EditorGUILayout.Space();
                     }
                 }
             }
@@ -169,7 +174,7 @@ namespace StaTech.AnimationValidator
                 {
                     GUIStyle s = new GUIStyle(EditorStyles.label)
                     {
-                        normal = { textColor = Color.green }
+                        normal = { textColor = darkGreen }
                     };
                     GUILayout.Label(detail, s);
                     GUILayout.FlexibleSpace();
@@ -221,10 +226,10 @@ namespace StaTech.AnimationValidator
                 case FixState.ErrorDuplicate:
                 case FixState.ErrorNoSameName:
 
-                    return Color.yellow;
+                    return orange;
                 case FixState.Fixed:
 
-                    return Color.green;
+                    return darkGreen;
                 default:
 
                     return Color.white;
