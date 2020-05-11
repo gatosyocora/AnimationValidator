@@ -1,25 +1,34 @@
-# AnimationValidator
+# AnimationValidator4VRC
 
 ## Overview
 Hierarchy上でのオブジェクトの階層を変えたことによって起きるAnimationのmissingを修正します
+fork元のものをVRChat用および使いやすく多少の変更をしています
+
+fork元からの変更点は以下の通りです。
+* AnimatorOverrideControllerに対応
+* 同じ名前のオブジェクトが複数見つかった場合そのリストを表示し、変更後のパスを選択して自動変更するように
+* 結果の文字色を一部変更
+* VRCSDK2がインポートされている場合、VRC_AvatarDescriptorから対象のAnimationOverrideControllerを取得されるように
 
 ## Demo
 ![result](https://github.com/kyorosuke/AnimationValidator/blob/feature/media/demo_1.gif)
+↑fork元の動作DEMOです。基本操作は変わりません。
 
 ## Requirements
-Unity 2017.3.1p4以上なら動くはず  
-それ以下の動作検証はしてないです
+Unity 2018.4.20f1で動作テストをしました
 
 ## How To Use
-Now書いてりんぐ
+1. unitypackageをダウンロードして対象のUnityプロジェクトにインポートする
+2. 修正したいAnimatorController(またはAnimatorOverrideController)を設定したAnimatorを持ったオブジェクトをHierarchy上で右クリックで選択する
+3. 「アニメーションクリップの修正」を選択する
+4. 「全部まとめて修正」またはそれぞれの「自動修正」ボタンを選択する<br>自動修正できる場合は緑のチェックが表示される。対象オブジェクトと同名のものが複数あるなどの場合手動作業が必要
+4-1. オレンジ色で「同じ名前のオブジェクトが子階層上に複数あります」と表示された場合、下のリストから変更後として適したパスの「Select」ボタンを選択する<br>このパスのリストは元のパスと後ろから比較して一致率が高いパスから順に並んでいる。
 
 ## Installation
-このレポジトリをpullするか、  
-https://github.com/kyorosuke/AnimationValidator/raw/master/Assets/StaTech/AnimationValidator/Package/AnimationValidator_v1.0.0.unitypackage  
-を任意のプロジェクト内にインポートしてください
+
 
 ## Contribution
-プルリクくだしあ
+https://github.com/sukedon/AnimationValidator をforkして作成しました
 
 Fork it ( https://github.com/kyorosuke/AnimationValidator/fork )  
 Create your feature branch (git checkout -b my-new-feature)  
@@ -30,4 +39,4 @@ Create new Pull Request
 
 ## LICENSE
 
-[MIT Licene](https://github.com/kyorosuke/AnimationValidator/blob/master/LICENSE)
+[MIT Licene](https://github.com/gatosyocora/AnimationValidator/blob/master/LICENSE)
