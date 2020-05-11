@@ -29,3 +29,6 @@ sysinfo.txt
 #Icon?
 ehthumbs.db
 Thumbs.db
+
+Assets/
+!Assets/StaTech
