@@ -191,10 +191,7 @@ namespace StaTech.AnimationValidator
 
                 // 修復処理
                 var correctPath = pathInHierarchy.First().RelativePath;
-                Debug.Log(anim.PropPath + "を" + correctPath + "に修正");
-                anim.State                          = FixState.Fixed;
-                anim.SerializedProperty.stringValue = correctPath;
-                anim.SerializedClip.ApplyModifiedProperties();
+                UpdateAnimationRelativePath(anim, correctPath);
             }
         }
 
@@ -252,6 +249,14 @@ namespace StaTech.AnimationValidator
             path = parent.name + "/" + path;
 
             return ParentRelativePath(parent, path, rootName);
+        }
+
+        public static void UpdateAnimationRelativePath(LostProperty prop, string newPath)
+        {
+            Debug.Log(prop.PropPath + "を" + newPath + "に修正");
+            prop.State = FixState.Fixed;
+            prop.SerializedProperty.stringValue = newPath;
+            prop.SerializedClip.ApplyModifiedProperties();
         }
 
         private class PathModel

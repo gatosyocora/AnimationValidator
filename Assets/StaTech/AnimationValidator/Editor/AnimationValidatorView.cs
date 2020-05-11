@@ -144,6 +144,17 @@ namespace StaTech.AnimationValidator
                 {
                     var icon = prop.State == FixState.Fixed ? SuccessIcon : ErrorIcon;
                     DrawSpaceAndText(DetailSpace, prop.PropPath + " : " + prop.AttributeName, icon, prop.State);
+
+                    if (prop.State == FixState.ErrorDuplicate)
+                    {
+                        foreach (var path in prop.FindPropPaths)
+                        {
+                            DrawButtonAndText("Select", path, () => 
+                            {
+                                AnimationValidator.UpdateAnimationRelativePath(prop, path);
+                            });
+                        }
+                    }
                 }
             }
         }
@@ -191,6 +202,15 @@ namespace StaTech.AnimationValidator
                         GUILayout.FlexibleSpace();
                     }
                 }
+            }
+        }
+
+        private void DrawButtonAndText(string buttonName, string text, System.Action callback = null)
+        {
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                DrawButton(buttonName, callback);
+                GUILayout.Label(text);
             }
         }
 
