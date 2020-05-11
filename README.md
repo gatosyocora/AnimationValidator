@@ -12,7 +12,7 @@ fork元からの変更点は以下の通りです。
 
 ## Demo
 ![result](https://github.com/kyorosuke/AnimationValidator/blob/feature/media/demo_1.gif)
-↑fork元の動作DEMOです。基本操作は変わりません。
+<br>↑fork元の動作DEMOです。基本操作は変わりません。
 
 ## Requirements
 Unity 2018.4.20f1で動作テストをしました
