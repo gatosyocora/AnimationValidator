@@ -43,9 +43,8 @@ namespace StaTech.AnimationValidator
             }
 
             var runTimeAnimatorController = _animator.runtimeAnimatorController;
-            var animationController       = runTimeAnimatorController as AnimatorController;
 
-            if (animationController == null)
+            if (runTimeAnimatorController == null)
             {
                 // 警告window出す
                 EditorUtility.DisplayDialog("エラー", "AnimatorにAnimationControllerが設定されていません", "閉じる");
@@ -53,23 +52,42 @@ namespace StaTech.AnimationValidator
                 return null;
             }
 
-            if (_clipValidations == null) {
-                _clipValidations = new List <ClipValidationContainer>();
+            if (_clipValidations == null)
+            {
+                _clipValidations = new List<ClipValidationContainer>();
             }
-            else {
+            else
+            {
                 _clipValidations.Clear();
             }
 
-            // 全てのレイヤーを取り出す
-            for (var i = 0; i < animationController.layers.Length; i++)
+            var animationController = runTimeAnimatorController as AnimatorController;
+            var overrideController = runTimeAnimatorController as AnimatorOverrideController;
+            if (animationController != null)
             {
-                var layer        = animationController.layers[i];
-                var stateMachine = layer.stateMachine;
-                // 全てのステートを取り出す
-                for (var j = 0; j < stateMachine.states.Length; j++)
+                // 全てのレイヤーを取り出す
+                for (var i = 0; i < animationController.layers.Length; i++)
                 {
-                    var state = stateMachine.states[j];
-                    var clip  = state.state.motion as AnimationClip;
+                    var layer = animationController.layers[i];
+                    var stateMachine = layer.stateMachine;
+                    // 全てのステートを取り出す
+                    for (var j = 0; j < stateMachine.states.Length; j++)
+                    {
+                        var state = stateMachine.states[j];
+                        var clip = state.state.motion as AnimationClip;
+                        if (!clip) { continue; }
+                        var validationData = FindLostAnimations(clip, selectedTransform);
+                        _clipValidations.Add(validationData);
+                    }
+                }
+            }
+            else if (overrideController != null)
+            {
+                // ベースのAnimatorControllerと名前が一致するAnimationClipはOverrideされていないものなので除外する
+                var baseAnimationController = overrideController.runtimeAnimatorController as AnimatorController;
+                var anims = overrideController.animationClips.Where((x, i) => baseAnimationController.animationClips[i].name != x.name).ToList();
+                foreach (var clip in anims)
+                {
                     if (!clip) { continue; }
                     var validationData = FindLostAnimations(clip, selectedTransform);
                     _clipValidations.Add(validationData);
