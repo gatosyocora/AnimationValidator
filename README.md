@@ -1,7 +1,7 @@
 # AnimationValidator4VRC
 
 ## Overview
-Hierarchy上でのオブジェクトの階層を変えたことによって起きるAnimationのmissingを修正します
+Hierarchy上でのオブジェクトの階層を変えたことによって起きるAnimationのmissingを修正します<br>
 fork元のものをVRChat用および使いやすく多少の変更をしています
 
 fork元からの変更点は以下の通りです。
