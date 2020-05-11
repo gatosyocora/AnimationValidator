@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+#if VRC_SDK_VRCSDK2
+using VRCSDK2
+#endif
 
 namespace StaTech.AnimationValidator
 {
@@ -43,6 +46,16 @@ namespace StaTech.AnimationValidator
             }
 
             var runTimeAnimatorController = _animator.runtimeAnimatorController;
+
+#if VRC_SDK_VRCSDK2
+            if (runTimeAnimatorController == null)
+            {
+                var avatar = selectTransform.GetComponent<VRC_AvatarDescripter>();
+                if (avatar != null) {
+                    runTimeAnimatorController = avatar.customStandingAnims;
+                }
+            }
+#endif
 
             if (runTimeAnimatorController == null)
             {
