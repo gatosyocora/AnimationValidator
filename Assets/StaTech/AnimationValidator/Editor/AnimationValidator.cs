@@ -184,6 +184,7 @@ namespace StaTech.AnimationValidator
                 {
                     // 複数のobjectが存在するから修正出来ない
                     anim.State = FixState.ErrorDuplicate;
+                    anim.FindPropPaths = pathInHierarchy.Select(x => x.RelativePath).ToArray();
                     continue;
                 }
 
@@ -308,6 +309,11 @@ namespace StaTech.AnimationValidator
         public SerializedObject SerializedClip;
 
         public SerializedProperty SerializedProperty;
+
+        /// <summary>
+        ///     複数見つかった更新候補のパス
+        /// </summary>
+        public string[] FindPropPaths;
 
         /// <summary>
         ///     修復済みフラグ
