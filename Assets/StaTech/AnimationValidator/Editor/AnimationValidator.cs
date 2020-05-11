@@ -197,7 +197,10 @@ namespace StaTech.AnimationValidator
                 {
                     // 複数のobjectが存在するから修正出来ない
                     anim.State = FixState.ErrorDuplicate;
-                    anim.FindPropPaths = pathInHierarchy.Select(x => x.RelativePath).ToArray();
+                    // 後方一致で類似したパス順に並び替えて見つかったオブジェクトの相対パスを残しておく
+                    anim.FindPropPaths = OrderPathByValidity(
+                                            pathInHierarchy.Select(x => x.RelativePath).ToList(), 
+                                            anim.PropPath);
                     continue;
                 }
 
@@ -272,6 +275,35 @@ namespace StaTech.AnimationValidator
             prop.SerializedClip.ApplyModifiedProperties();
         }
 
+        public static List<string> OrderPathByValidity(List<string> targetPaths, string path)
+        {
+            var paths = path.Split('/');
+
+            return targetPaths.OrderByDescending(x =>
+            {
+                var xPaths = x.Split('/');
+
+                int count = 0;
+                int maxCount = Mathf.Min(paths.Length, xPaths.Length);
+                string searchPath = paths.Last();
+                string searchXPath = xPaths.Last();
+                for (count = 0; count < maxCount; count++)
+                {
+                    if (searchXPath != searchPath)
+                        return count;
+
+                    if (count < maxCount - 1)
+                    {
+                        searchPath = paths[paths.Length - count - 2] + "/" + searchPath;
+                        searchXPath = xPaths[xPaths.Length - count - 2] + "/" + searchXPath;
+                    }
+                }
+
+                return maxCount;
+
+            }).ToList();
+        }
+
         private class PathModel
         {
             public readonly string ObjectName;
@@ -331,7 +363,7 @@ namespace StaTech.AnimationValidator
         /// <summary>
         ///     複数見つかった更新候補のパス
         /// </summary>
-        public string[] FindPropPaths;
+        public List<string> FindPropPaths;
 
         /// <summary>
         ///     修復済みフラグ
