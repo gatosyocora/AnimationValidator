@@ -18,14 +18,14 @@ fork元からの変更点は以下の通りです。
 Unity 2018.4.20f1で動作テストをしました
 
 ## How To Use
-1. unitypackageをダウンロードして対象のUnityプロジェクトにインポートする
+1. [releases](https://github.com/gatosyocora/AnimationValidator4VRC/releases)からunitypackageをダウンロードして対象のUnityプロジェクトにインポートする
 2. 修正したいAnimatorController(またはAnimatorOverrideController)を設定したAnimatorを持ったオブジェクトをHierarchy上で右クリックで選択する
 3. 「アニメーションクリップ修正」を選択する
 4. 「全部まとめて修正」またはそれぞれの「自動修正」ボタンを選択する<br>自動修正できる場合は緑のチェックが表示される<br>対象オブジェクトと同名のものが複数あるなどの場合は手動作業が必要
     1. オレンジ色で「同じ名前のオブジェクトが子階層上に複数あります」と表示された場合、下のリストから変更後として適したパスの「Select」ボタンを選択する<br>このパスのリストは元のパスと後ろから比較して一致率が高いパスから順に並んでいる。
 
 ## Installation
-
+[releases](https://github.com/gatosyocora/AnimationValidator4VRC/releases)からunitypackageをダウンロードして対象のUnityプロジェクトにインポートしてください
 
 ## Contribution
 https://github.com/sukedon/AnimationValidator をforkして作成しました
