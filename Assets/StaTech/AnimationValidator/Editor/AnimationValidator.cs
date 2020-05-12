@@ -190,6 +190,7 @@ namespace StaTech.AnimationValidator
                 {
                     //同名のobjectNameが存在しない
                     anim.State = FixState.ErrorNoSameName;
+                    anim.FixedPath = anim.PropPath;
                     continue;
                 }
 
@@ -265,6 +266,11 @@ namespace StaTech.AnimationValidator
             path = parent.name + "/" + path;
 
             return ParentRelativePath(parent, path, rootName);
+        }
+
+        public static bool ExistObjectFromAnimationPath(GameObject rootObj, string path)
+        {
+            return (rootObj.transform.Find(path) != null);
         }
 
         public static void UpdateAnimationRelativePath(LostProperty prop, string newPath)
@@ -364,6 +370,11 @@ namespace StaTech.AnimationValidator
         ///     複数見つかった更新候補のパス
         /// </summary>
         public List<string> FindPropPaths;
+
+        /// <summary>
+        /// 修復後候補のパス
+        /// </summary>
+        public string FixedPath;
 
         /// <summary>
         ///     修復済みフラグ
