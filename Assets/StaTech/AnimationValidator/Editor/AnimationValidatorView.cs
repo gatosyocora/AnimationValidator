@@ -152,7 +152,7 @@ namespace StaTech.AnimationValidator
                     {
                         foreach (var path in prop.FindPropPaths)
                         {
-                            DrawButtonAndText("Select", path, () => 
+                            DrawButtonAndText("Select", path, () =>
                             {
                                 AnimationValidator.UpdateAnimationRelativePath(prop, path);
                             });
@@ -162,7 +162,7 @@ namespace StaTech.AnimationValidator
                     }
                     else if (prop.State == FixState.ErrorNoSameName)
                     {
-                        prop.FixedPath = DrawButtonAndEditText("Fix", "->", prop.FixedPath, " : "+prop.AttributeName, () => 
+                        prop.FixedPath = DrawButtonAndEditText("Fix", "->", prop.FixedPath, " : "+prop.AttributeName, () =>
                         {
                             if (AnimationValidator.ExistObjectFromAnimationPath(_selectedObject, prop.FixedPath))
                             {
