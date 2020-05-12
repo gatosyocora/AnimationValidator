@@ -7,6 +7,7 @@ fork元のものをVRChat用および使いやすく多少の変更をしてい�
 fork元からの変更点は以下の通りです。
 * AnimatorOverrideControllerに対応
 * 同じ名前のオブジェクトが複数見つかった場合そのリストを表示し、変更後のパスを選択して自動変更するように
+* 同じ名前のオブジェクトが見つからなかったときに手動入力でパスを変更できるように
 * 結果の文字色を一部変更
 * VRCSDK2がインポートされている場合、VRC_AvatarDescriptorから対象のAnimationOverrideControllerを取得されるように
 
