@@ -164,7 +164,10 @@ namespace StaTech.AnimationValidator
                     {
                         prop.FixedPath = DrawButtonAndEditText("Fix", "->", prop.FixedPath, " : "+prop.AttributeName, () => 
                         {
-                            AnimationValidator.UpdateAnimationRelativePath(prop, prop.FixedPath);
+                            if (AnimationValidator.ExistObjectFromAnimationPath(_selectedObject, prop.FixedPath))
+                            {
+                                AnimationValidator.UpdateAnimationRelativePath(prop, prop.FixedPath);
+                            }
                         });
                         EditorGUILayout.Space();
                     }

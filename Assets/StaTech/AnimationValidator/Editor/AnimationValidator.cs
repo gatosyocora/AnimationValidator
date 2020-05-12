@@ -268,6 +268,11 @@ namespace StaTech.AnimationValidator
             return ParentRelativePath(parent, path, rootName);
         }
 
+        public static bool ExistObjectFromAnimationPath(GameObject rootObj, string path)
+        {
+            return (rootObj.transform.Find(path) != null);
+        }
+
         public static void UpdateAnimationRelativePath(LostProperty prop, string newPath)
         {
             Debug.Log(prop.PropPath + "を" + newPath + "に修正");
