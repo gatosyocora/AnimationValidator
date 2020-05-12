@@ -160,6 +160,14 @@ namespace StaTech.AnimationValidator
 
                         EditorGUILayout.Space();
                     }
+                    else if (prop.State == FixState.ErrorNoSameName)
+                    {
+                        prop.FixedPath = DrawButtonAndEditText("Fix", "->", prop.FixedPath, " : "+prop.AttributeName, () => 
+                        {
+                            AnimationValidator.UpdateAnimationRelativePath(prop, prop.FixedPath);
+                        });
+                        EditorGUILayout.Space();
+                    }
                 }
             }
         }
@@ -217,6 +225,19 @@ namespace StaTech.AnimationValidator
                 DrawButton(buttonName, callback);
                 GUILayout.Label(text);
             }
+        }
+
+        private string DrawButtonAndEditText(string buttonName, string labelText, string inputText, string afterText, System.Action callback = null)
+        {
+            string text = string.Empty;
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                DrawButton(buttonName, callback);
+                GUILayout.Label(labelText, GUILayout.Width(labelText.Length * 10f));
+                text = GUILayout.TextField(inputText);
+                GUILayout.Label(afterText, GUILayout.Width(afterText.Length * 10f));
+            }
+            return text;
         }
 
         private static Color GetColor(FixState state)

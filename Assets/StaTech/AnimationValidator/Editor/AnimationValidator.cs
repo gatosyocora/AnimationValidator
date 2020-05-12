@@ -190,6 +190,7 @@ namespace StaTech.AnimationValidator
                 {
                     //同名のobjectNameが存在しない
                     anim.State = FixState.ErrorNoSameName;
+                    anim.FixedPath = anim.PropPath;
                     continue;
                 }
 
@@ -364,6 +365,11 @@ namespace StaTech.AnimationValidator
         ///     複数見つかった更新候補のパス
         /// </summary>
         public List<string> FindPropPaths;
+
+        /// <summary>
+        /// 修復後候補のパス
+        /// </summary>
+        public string FixedPath;
 
         /// <summary>
         ///     修復済みフラグ
